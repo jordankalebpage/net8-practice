@@ -40,4 +40,23 @@ public class SuperHeroController(DataContext context) : ControllerBase
 
         return Ok(hero);
     }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<SuperHero>> UpdateHero(int id, SuperHero hero)
+    {
+        var existingHero = await _context.SuperHeroes.FindAsync(id);
+        if (existingHero == null)
+        {
+            return NotFound("Hero not found");
+        }
+
+        existingHero.Name = hero.Name;
+        existingHero.FirstName = hero.FirstName;
+        existingHero.LastName = hero.LastName;
+        existingHero.Place = hero.Place;
+
+        await _context.SaveChangesAsync();
+
+        return Ok(existingHero);
+    }
 }
