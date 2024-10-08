@@ -30,4 +30,14 @@ public class SuperHeroController(DataContext context) : ControllerBase
 
         return Ok(hero);
     }
+
+    // probably want to make a DTO for this
+    [HttpPost]
+    public async Task<ActionResult<SuperHero>> AddHero(SuperHero hero)
+    {
+        _context.SuperHeroes.Add(hero);
+        await _context.SaveChangesAsync();
+
+        return Ok(hero);
+    }
 }
