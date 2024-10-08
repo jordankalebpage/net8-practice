@@ -23,7 +23,7 @@ public class SuperHeroController(DataContext context) : ControllerBase
     public async Task<ActionResult<List<SuperHero>>> GetHero(int id)
     {
         var hero = await _context.SuperHeroes.FindAsync(id);
-        if (hero == null)
+        if (hero is null)
         {
             return NotFound("Hero not found");
         }
@@ -45,7 +45,7 @@ public class SuperHeroController(DataContext context) : ControllerBase
     public async Task<ActionResult<SuperHero>> UpdateHero(int id, SuperHero hero)
     {
         var existingHero = await _context.SuperHeroes.FindAsync(id);
-        if (existingHero == null)
+        if (existingHero is null)
         {
             return NotFound("Hero not found");
         }
